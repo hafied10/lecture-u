@@ -27,7 +27,7 @@
         url: form.url.value,
         date: form.date.value
       };
-      const res = await fetch('/api/lectures', {
+      const res = await fetch('https://lecture-u.vercel.app/api/lectures', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
