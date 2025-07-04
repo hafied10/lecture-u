@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>إضافة محاضرة</title>
+</head>
+<body>
+  <h1>➕ إضافة محاضرة جديدة</h1>
+  <form id="lecture-form">
+    <input name="title" placeholder="اسم المحاضرة" required><br>
+    <input name="subject" placeholder="المادة" required><br>
+    <input name="type" placeholder="النوع (محاضرة/سكشن)" required><br>
+    <input name="url" placeholder="رابط الفيديو/الملف" required><br>
+    <input name="date" type="date" required><br>
+    <button type="submit">إضافة</button>
+  </form>
+  <p id="status"></p>
+
+  <script>
+    document.getElementById('lecture-form').addEventListener('submit', async e => {
+      e.preventDefault();
+      const form = e.target;
+      const data = {
+        title: form.title.value,
+        subject: form.subject.value,
+        type: form.type.value,
+        url: form.url.value,
+        date: form.date.value
+      };
+      const res = await fetch('/api/lectures', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      const msg = await res.json();
+      document.getElementById('status').textContent = msg.message || msg.error;
+      form.reset();
+    });
+  </script>
+</body>
+</html>

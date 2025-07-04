@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#006837" />
+    <meta
+      name="description"
+      content="موقع كبسولتى للمراجعات والملخاصات الخاصه بالقسم الهندسه الزراعيه"
+    />
+    <title>الداتا</title>
+    <link rel="shortcut icon" href="imgs/كبسولة 2.png" type="image/x-icon" />
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/files.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="logo">
+          <img src="imgs/كبسولتى.png" alt="لوجو كبسولتى" />
+        </div>
+        <!-- <i class="fa-duotone fa-bars"></i> -->
+        <ul>
+          <li><a href="choose-term.html" class="act">الترم</a></li>
+        </ul>
+      </div>
+    </header>
+    <section class="files">
+      <div class="container">
+        <h2>المحاضرات</h2>
+        <!-- احصاء وتصميم تجارب (خ)  -->
+        <div class="file-mda">
+          <h3>احصاء وتصميم تجارب (خ)</h3>
+          <div class="material" id="ehsa">
+            <!-- اضافه المحاضره -->
+            
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <script>
+    fetch('/api/lectures')
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById('ehsa');
+        data.forEach(lec => {
+          const el = document.createElement('div');
+          el.className = 'lect';
+          el.innerHTML = `
+            <p class="name">
+                ${lec.title}
+              </p>
+              <img src="imgs/file.jpg" alt="ملف" />
+              <a href="${lec.url}" target="_blank">
+                ${lec.subject}
+                <img src="imgs/download.svg" class="download">
+              </a>
+          `;
+          container.appendChild(el);
+        });
+      });
+  </script>
+</body>
+</html>
+<!-- <i class="fa-duotone fa-tractor"></i> -->
+<!-- <i class="fa-light fa-sprinkler"></i> -->
+<!-- <i class="fa-solid fa-ruler"></i> -->
+<!-- <i class="fa-solid fa-farm"></i> -->
+<!-- <i class="fa-solid fa-fish"></i> -->
+<!-- <i class="fa-solid fa-abacus"></i> -->
